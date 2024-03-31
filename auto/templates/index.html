@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css"
+      rel="stylesheet"
+    />
+    <title>Auto Salon</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        thead {
+            text-align: left;
+        }
+        th {
+            border: 1px solid black;
+            padding: 5px
+        }
+        td {
+            border: 1px solid black;
+            padding: 5px
+        }
+        .main-navigation {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .main-navigation-item {
+            display: inline-block;
+            padding: 10px;
+        }
+        .main-navigation-item a{
+            color: #05364d;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight:500;
+        }
+        .main-navigation-item a:hover {
+            color: #efb6df;
+
+        }
+        .main-navigation-item.active {
+            color: #efb6df;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+        .container {
+            width: 1150px;
+            margin: 0 auto;
+        }
+        option {
+            color: #05364d;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight:500;
+        }
+    </style>
+</head>
+<body>
+
+                    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+  <!-- Container wrapper -->
+  <div class="container">
+    <!-- Navbar brand -->
+
+    <!-- Toggle button -->
+    <button
+      data-mdb-collapse-init
+      class="navbar-toggler"
+      type="button"
+      data-mdb-target="#navbarButtonsExample"
+      aria-controls="navbarButtonsExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="main-navigation-item">Auto Salon</li>
+          <li class="main-navigation-item">
+              <a href="{% url 'cars' %}">Barchasi</a>
+        </li>
+         {% for brand in brands %}
+            <li class="main-navigation-item">
+                <a href="{% url 'bolim' brand.pk %}">{{ brand }}</a>
+            </li>
+            {% endfor %}
+      </ul>
+      <!-- Left links -->
+
+
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+
+<!--    Rangni filter qilish-->
+    <div class="container">
+         <form method="get">
+             <br>
+             <h6>!!!Rangni filter qilish 'barchasi' da turganda ishlidi hozircha!!!</h6>
+            <label for="color">Rangni tanlang:</label>
+            <select name="color" id="color">
+                <option value="">All Colors</option>
+                {% for color in colors %}
+                    <option value="{{ color.id }}">{{ color.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+    <br>
+
+<!--        Moshinalar royxatini jadval qilib chiqarish-->
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>MODEL</th>
+                    <th>NARX</th>
+                    <th>-</th>
+                    <th>RANG</th>
+                    <th>BRAND</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in cars %}
+                    <tr>
+                        <td>{{ car.id }}</td>
+                        <td>{{ car.model}}</td>
+                        <td>{{ car.price }}</td>
+                        <td>{{ car.price_types }}</td>
+                        <td>{{ car.colour }}</td>
+                        <td>{{ car.brand }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"
+></script>
+</body>
+</html>
